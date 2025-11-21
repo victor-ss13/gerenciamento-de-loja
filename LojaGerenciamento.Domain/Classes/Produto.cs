@@ -7,7 +7,7 @@
         public decimal Preco { get; private set; }
         public int Estoque { get; private set; }
 
-        public int CategoriaId { get; private set; }
+        public int IdCategoria { get; private set; }
         public Categoria Categoria { get; private set; }
 
         public string Situacao { get; private set; }
