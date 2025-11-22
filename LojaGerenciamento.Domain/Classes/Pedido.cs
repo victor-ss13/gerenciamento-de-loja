@@ -40,5 +40,71 @@
 
             Situacao = "Excluido";
         }
+
+        public void AdicionarItem(ItemPedido item)
+        {
+            if (Situacao != "Ativo")
+                throw new Exception("Apenas pedidos ativos podem ter itens adicionados");
+            if (item == null)
+                throw new Exception("Item é obrigatório");
+            if (item.Quantidade <= 0)
+                throw new Exception("Quantidade do item deve ser maior que zero");
+
+            Itens.Add(item);
+        }
+
+        public void RemoverItem(int idItemPedido)
+        {
+            if (Situacao != "Ativo")
+                throw new Exception("Apenas pedidos ativos podem ter itens removidos");
+
+            var item = Itens.FirstOrDefault(i => i.IdItemPedido == idItemPedido);
+
+            if (item == null)
+                throw new Exception("Item não encontrado no pedido");
+
+            Itens.Remove(item);
+        }
+
+        public void AtualizarQuantidadeItem(int idItemPedido, int novaQuantidade)
+        {
+            if (Situacao != "Ativo")
+                throw new Exception("Apenas pedidos ativos podem ter itens adicionados");
+
+            var item = Itens.FirstOrDefault(i => i.IdItemPedido == idItemPedido);
+
+            if (item == null)
+                throw new Exception("Item não encontrado no pedido");
+
+            if (novaQuantidade <= 0)
+                throw new Exception("Quantidade do item deve ser maior que zero");
+
+            item.AlterarQuantidade(novaQuantidade);
+        }
+
+        public void AdicionarPagamento(Pagamento pagamento)
+        {
+            if (Situacao != "Ativo")
+                throw new Exception("Apenas pedidos ativos podem ter pagamentos adicionados");
+            if (pagamento == null)
+                throw new Exception("Pagamento é obrigatório");
+
+            Pagamentos.Add(pagamento);
+        }
+
+        public decimal ObterValorTotal()
+        {
+            return Itens.Sum(i => i.Preco);
+        }
+
+        public decimal ObterValorPago()
+        {
+            return Pagamentos.Sum(p => p.Valor);
+        }
+
+        public bool EstaQuitado()
+        {
+            return ObterValorPago() >= ObterValorTotal();
+        }
     }
 }
