@@ -46,6 +46,14 @@
             Validar();
         }
 
+        public void AlterarQuantidade(int novaQuantidade)
+        {
+            if (novaQuantidade <= 0)
+                throw new Exception("Valor inválido para quantidade");
+
+            Quantidade = novaQuantidade;
+        }
+
         public void Excluir()
         {
             if (Situacao != "Ativo")
