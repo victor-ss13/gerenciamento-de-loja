@@ -8,6 +8,7 @@
         public Cliente Cliente { get; private set; }
         public string Situacao { get; private set; }
         public ICollection<ItemPedido> Itens { get; private set; } = new List<ItemPedido>();
+        public ICollection<Pagamento> Pagamentos { get; private set; } = new List<Pagamento>();
 
         public Pedido() { }
 
