@@ -50,6 +50,41 @@
             Validar();
         }
 
+        public void AdicionarEstoque(int quantidade)
+        {
+            if (Situacao != "Ativo")
+                throw new Exception("Não é possível adicionar estoque a um produto inativo");
+            if (quantidade <= 0)
+                throw new Exception("Quantidadede deve ser maior que zero");
+
+            Estoque += quantidade;
+        }
+
+        public void RemoverEstoque(int quantidade)
+        {
+            if (Situacao != "Ativo")
+                throw new Exception("Não é possível remover estoque de um produto inativo");
+            if (quantidade <= 0)
+                throw new Exception("Quantidadede deve ser maior que zero");
+            if (Estoque < quantidade)
+                throw new Exception("Estoque insuficiente");
+
+            Estoque -= quantidade;
+        }
+
+        public void AtualizarEstoque(int novoEstoque)
+        {
+            if (novoEstoque < 0)
+                throw new Exception("Estoque não pode ser negativo");
+
+            Estoque = novoEstoque;
+        }
+
+        public bool TemEstoqueDisponivel(int quantidade)
+        {
+            return Estoque >= quantidade;
+        }
+
         public void Excluir()
         {
             if (Situacao != "Ativo")

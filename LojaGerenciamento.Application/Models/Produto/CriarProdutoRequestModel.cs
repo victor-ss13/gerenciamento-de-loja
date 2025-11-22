@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LojaGerenciamento.Application.Models.Produto
+﻿namespace LojaGerenciamento.Application.Models.Produto
 {
-    internal class CriarProdutoRequestModel
+    public class CriarProdutoRequestModel
     {
+        public string Nome { get; set; }
+        public decimal Preco { get; set; }
+        public int Estoque { get; set; }
+        public int IdCategoria { get; set; }
     }
 }

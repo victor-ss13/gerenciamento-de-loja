@@ -94,12 +94,12 @@
 
         public decimal ObterValorTotal()
         {
-            return Itens.Sum(i => i.Preco);
+            return Itens.Where(i => i.Situacao == "Ativo").Sum(i => i.Preco * i.Quantidade);
         }
 
         public decimal ObterValorPago()
         {
-            return Pagamentos.Sum(p => p.Valor);
+            return Pagamentos.Where(p => p.Situacao == "Ativo").Sum(p => p.Valor);
         }
 
         public bool EstaQuitado()

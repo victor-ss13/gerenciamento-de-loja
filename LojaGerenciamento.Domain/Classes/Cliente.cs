@@ -43,10 +43,21 @@
             if (Situacao == "Excluido")
                 throw new Exception("Cliente já está excluído");
 
-            if (Pedidos.Any())
+            if (Pedidos.Any(p => p.Situacao == "Ativo"))
                 throw new Exception("Não é possível excluir cliente com pedidos associados");
 
             Situacao = "Excluido";
+        }
+
+        public decimal ObterValorTotalPedidos()
+        {
+            // Esse ObterValorTotal() é para ser o mesmo usado em Pedido?
+            return Pedidos.Where(p => p.Situacao == "Ativo").Sum(p => p.ObterValorTotal());
+        }
+
+        public int ObterQuantidadePedidos()
+        {
+            return Pedidos.Count(p => p.Situacao == "Ativo");
         }
     }
 }

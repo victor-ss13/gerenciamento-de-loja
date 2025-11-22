@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LojaGerenciamento.Application.Models.Produto
+﻿namespace LojaGerenciamento.Application.Models.Produto
 {
-    internal class ListarProdutoResponseModel
+    public class ListarProdutoResponseModel
     {
+        public List<ProdutoResponseModel> Lista { get; set; } = new List<ProdutoResponseModel>();
     }
 }
