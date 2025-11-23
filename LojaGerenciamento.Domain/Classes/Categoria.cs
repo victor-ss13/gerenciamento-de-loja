@@ -36,8 +36,8 @@
         {
             if (Situacao == "Excluido")
                 throw new Exception("Categoria já está excluída");
-            if (Produtos.Any(p => p.Situacao == "Ativo")) ;
-            throw new Exception("Não é possível excluir categoria com produtos ativos associados");
+            if (Produtos.Any(p => p.Situacao == "Ativo"))
+                throw new Exception("Não é possível excluir categoria com produtos ativos associados");
 
             Situacao = "Excluido";
         }
