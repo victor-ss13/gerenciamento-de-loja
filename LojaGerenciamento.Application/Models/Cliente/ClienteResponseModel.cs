@@ -19,4 +19,5 @@
         public decimal ValorTotal { get; set; }
         public bool EstaQuitado { get; set; }
         public string Situacao { get; set; }
+    }
 }

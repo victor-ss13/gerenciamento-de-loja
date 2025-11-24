@@ -4,16 +4,16 @@
     {
         public bool Sucesso { get; set; }
         public string Mensagem { get; set; }
-        public T? Dados { get; set; }
+        public T? Data { get; set; }
         public List<string> Erros { get; set; } = new List<string>();
 
-        public static Response<T> Ok(T dados, string mensagem = "Operação realizada com sucesso")
+        public static Response<T> Ok(T data, string mensagem = "Operação realizada com sucesso")
         {
             return new Response<T>
             {
                 Sucesso = true,
                 Mensagem = mensagem,
-                Dados = dados,
+                Data = data,
             };
         }
 
