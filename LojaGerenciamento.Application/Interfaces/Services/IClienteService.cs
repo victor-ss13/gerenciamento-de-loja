@@ -11,11 +11,5 @@ namespace LojaGerenciamento.Application.Interfaces.Services
         Task<Response<ClienteResponseModel>> AtualizarClienteAsync(AtualizarClienteRequestModel request);
         Task<Response<ClienteResponseModel>> ExcluirClienteAsync(int id);
         Task<Response<List<PedidoResumoClienteResponseModel>>> ObterPedidosDoClienteAsync(int idCliente);
-
-        // Métodos adicionais
-        Task<Response<decimal>> ObterValorTotalPedidosAsync(int idCliente);
-        Task<Response<int>> ObterQuantidadePedidosAsync(int idCliente);
-
-
     }
 }
