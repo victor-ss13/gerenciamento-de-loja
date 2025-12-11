@@ -96,9 +96,7 @@ while (executando)
     switch (opcao)
     {
         case "1":
-            Console.WriteLine("\n[Menu de Categorias - Em desenvolvimento]");
-            Console.WriteLine("Pressione qualquer tecla para voltar...");
-            Console.ReadKey();
+            await LojaGerenciamento.ConsoleApp.Menus.MenuCategorias.ExibirAsync(serviceProvider);
             break;
 
         case "2":
@@ -108,9 +106,7 @@ while (executando)
             break;
 
         case "3":
-            Console.WriteLine("\n[Menu de Clientes - Em desenvolvimento]");
-            Console.WriteLine("Pressione qualquer tecla para voltar...");
-            Console.ReadKey();
+            await LojaGerenciamento.ConsoleApp.Menus.MenuClientes.ExibirAsync(serviceProvider);
             break;
 
         case "4":

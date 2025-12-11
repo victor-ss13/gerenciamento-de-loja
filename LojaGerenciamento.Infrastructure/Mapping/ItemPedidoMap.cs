@@ -24,6 +24,10 @@ namespace LojaGerenciamento.Infrastructure.Mapping
                 .WithMany(p => p.Itens)
                 .HasForeignKey(ip => ip.IdPedido)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Produto)
+                .WithMany()
+                .HasForeignKey(x => x.IdProduto);
         }
     }
 }

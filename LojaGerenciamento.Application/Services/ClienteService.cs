@@ -68,6 +68,7 @@ namespace LojaGerenciamento.Application.Services
                     .ThenInclude(p => p.Itens)
                 .Include(c => c.Pedidos)
                     .ThenInclude(p => p.Pagamentos)
+                .Where(x => x.Situacao == "Ativo")
                 .AsQueryable();
 
             // Filtro por ID
@@ -85,16 +86,17 @@ namespace LojaGerenciamento.Application.Services
             // Filtro: Apenas clientes com pedidos
             if (request.ApenasComPedidos.HasValue && request.ApenasComPedidos.Value)
             {
-                query = query.Where(x => x.Pedidos.Any(x => x.Situacao == "Ativo"));
+                query = query.Where(x => x.Pedidos.Any(p => p.Situacao == "Ativo"));
             }
 
             // Filtro: Apenas clientes sem pedidos
             if (request.ApenasSemPedidos.HasValue && request.ApenasSemPedidos.Value)
             {
-                query = query.Where(x => !x.Pedidos.Any(x => x.Situacao == "Ativo"));
+                query = query.Where(x => !x.Pedidos.Any(p => p.Situacao == "Ativo"));
             }
 
             var clientes = await query.OrderBy(x => x.Nome).ToListAsync();
+
 
             foreach (var item in clientes)
             {
