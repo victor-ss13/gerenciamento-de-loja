@@ -100,9 +100,7 @@ while (executando)
             break;
 
         case "2":
-            Console.WriteLine("\n[Menu de Produtos - Em desenvolvimento]");
-            Console.WriteLine("Pressione qualquer tecla para voltar...");
-            Console.ReadKey();
+            await LojaGerenciamento.ConsoleApp.Menus.MenuProdutos.ExibirAsync(serviceProvider);
             break;
 
         case "3":
