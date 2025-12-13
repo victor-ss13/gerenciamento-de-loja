@@ -33,8 +33,8 @@
             if (Preco <= 0)
                 throw new Exception("Preço é obrigatório");
 
-            if (Estoque <= 0)
-                throw new Exception("Estoque é obrigatório");
+            if (Estoque < 0)
+                throw new Exception("Estoque não pode ser negativo");
 
             if (Categoria == null)
                 throw new Exception("Categoria do produto é obrigatória");
@@ -65,7 +65,7 @@
             if (Situacao != "Ativo")
                 throw new Exception("Não é possível remover estoque de um produto inativo");
             if (quantidade <= 0)
-                throw new Exception("Quantidadede deve ser maior que zero");
+                throw new Exception("Quantidade deve ser maior que zero");
             if (Estoque < quantidade)
                 throw new Exception("Estoque insuficiente");
 
@@ -94,6 +94,14 @@
                 throw new Exception("Não é possível excluir produto com estoque disponível");
 
             Situacao = "Excluido";
+        }
+
+        public void AlterarPreco(decimal novoPreco)
+        {
+            if (novoPreco < 0)
+                throw new Exception("Preço deve ser maior que zero");
+
+            Preco = novoPreco;
         }
     }
 }

@@ -25,7 +25,7 @@
         private void Validar()
         {
             if (Pedido == null)
-                throw new Exception("Pedido é obrigátório");
+                throw new Exception("Pedido é obrigatório");
             if (Valor <= 0)
                 throw new Exception("Valor inválido");
             if (string.IsNullOrWhiteSpace(Metodo))
@@ -49,7 +49,7 @@
                 throw new Exception("Apenas pagamentos ativos podem ser excluídos");
 
             // Restringir exclusão de pagamentos apenas para pagamentos futuros (passados permanecem estáticos)
-            if (DataPagamento.Date < DateTime.Now)
+            if (DataPagamento.Date < DateTime.Now.Date)
                 throw new Exception("Não é possível excluir pagamento de data anterior");
 
             Situacao = "Excluido";
