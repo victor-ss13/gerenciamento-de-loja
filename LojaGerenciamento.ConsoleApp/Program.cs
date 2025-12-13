@@ -108,15 +108,11 @@ while (executando)
             break;
 
         case "4":
-            Console.WriteLine("\n[Menu de Pedidos - Em desenvolvimento]");
-            Console.WriteLine("Pressione qualquer tecla para voltar...");
-            Console.ReadKey();
+            await LojaGerenciamento.ConsoleApp.Menus.MenuPedidos.ExibirAsync(serviceProvider);
             break;
 
         case "5":
-            Console.WriteLine("\n[Menu de Pagamentos - Em desenvolvimento]");
-            Console.WriteLine("Pressione qualquer tecla para voltar...");
-            Console.ReadKey();
+            await LojaGerenciamento.ConsoleApp.Menus.MenuPagamentos.ExibirAsync(serviceProvider);
             break;
 
         case "0":
