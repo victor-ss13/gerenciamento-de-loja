@@ -27,7 +27,7 @@ namespace LojaGerenciamento.Application.Services
 
             var produto = await _context.Produtos
                 .Include(p => p.Categoria)
-                .FirstOrDefaultAsync(p => p.IdProduto == id);
+                .FirstOrDefaultAsync(p => p.IdProduto == id && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -55,6 +55,7 @@ namespace LojaGerenciamento.Application.Services
 
             var query = _context.Produtos
                 .Include(p => p.Categoria)
+                .Where(p => p.Situacao == "Ativo")
                 .AsQueryable();
 
             // Filtro por ID do Produto
@@ -139,13 +140,13 @@ namespace LojaGerenciamento.Application.Services
 
             // Verifica se já existe produto com o mesmo nome
             var produtoExistente = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.Nome.ToLower() == request.Nome.ToLower());
+                .FirstOrDefaultAsync(p => p.Nome.ToLower() == request.Nome.ToLower() && p.Situacao == "Ativo");
 
             if (produtoExistente != null)
                 throw new Exception("Já existe um produto com este nome");
 
             var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(c => c.IdCategoria == request.IdCategoria);
+                .FirstOrDefaultAsync(c => c.IdCategoria == request.IdCategoria && c.Situacao == "Ativo");
 
             if (categoria == null)
                 throw new Exception("Categoria não encontrada");
@@ -165,7 +166,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<ProdutoResponseModel>();
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -173,13 +174,14 @@ namespace LojaGerenciamento.Application.Services
             // Verifica se já existe outro produto com o mesmo nome
             var produtoExistente = await _context.Produtos
                 .FirstOrDefaultAsync(p => p.Nome.ToLower() == request.Nome.ToLower()
-                                       && p.IdProduto != request.IdProduto);
+                                       && p.IdProduto != request.IdProduto
+                                       && p.Situacao == "Ativo");
 
             if (produtoExistente != null)
                 throw new Exception("Já existe outro produto com este nome");
 
             var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(c => c.IdCategoria == request.IdCategoria);
+                .FirstOrDefaultAsync(c => c.IdCategoria == request.IdCategoria && c.Situacao == "Ativo");
 
             if (categoria == null)
                 throw new Exception("Categoria não encontrada");
@@ -199,7 +201,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<ProdutoResponseModel>();
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == id);
+                .FirstOrDefaultAsync(p => p.IdProduto == id && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -223,7 +225,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<ProdutoResponseModel>();
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -247,7 +249,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<ProdutoResponseModel>();
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -267,7 +269,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<ProdutoResponseModel>();
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -287,7 +289,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<ProdutoResponseModel>();
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -311,7 +313,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<bool>();
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == idProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == idProduto && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -333,7 +335,7 @@ namespace LojaGerenciamento.Application.Services
             };
 
             var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(c => c.IdCategoria == idCategoria);
+                .FirstOrDefaultAsync(c => c.IdCategoria == idCategoria && c.Situacao == "Ativo");
 
             if (categoria == null)
                 throw new Exception("Categoria não encontrada");

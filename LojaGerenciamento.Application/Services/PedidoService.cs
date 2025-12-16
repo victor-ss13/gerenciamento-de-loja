@@ -32,7 +32,7 @@ namespace LojaGerenciamento.Application.Services
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Produto)
                 .Include(p => p.Pagamentos)
-                .FirstOrDefaultAsync(p => p.IdPedido == id);
+                .FirstOrDefaultAsync(p => p.IdPedido == id && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
@@ -91,6 +91,7 @@ namespace LojaGerenciamento.Application.Services
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Produto)
                 .Include(p => p.Pagamentos)
+                .Where(p => p.Situacao == "Ativo")
                 .AsQueryable();
 
             // Filtro por ID do Pedido
@@ -194,7 +195,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<PedidoResponseModel>();
 
             var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(c => c.IdCliente == request.IdCliente);
+                .FirstOrDefaultAsync(c => c.IdCliente == request.IdCliente  && c.Situacao == "Ativo");
 
             if (cliente == null)
                 throw new Exception("Cliente não encontrado");
@@ -214,13 +215,13 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<PedidoResponseModel>();
 
             var pedido = await _context.Pedidos
-                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
 
             var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(c => c.IdCliente == request.IdCliente);
+                .FirstOrDefaultAsync(c => c.IdCliente == request.IdCliente && c.Situacao == "Ativo");
 
             if (cliente == null)
                 throw new Exception("Cliente não encontrado");
@@ -242,7 +243,7 @@ namespace LojaGerenciamento.Application.Services
             var pedido = await _context.Pedidos
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Produto)
-                .FirstOrDefaultAsync(p => p.IdPedido == id);
+                .FirstOrDefaultAsync(p => p.IdPedido == id && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
@@ -274,13 +275,13 @@ namespace LojaGerenciamento.Application.Services
 
             var pedido = await _context.Pedidos
                 .Include(p => p.Itens)
-                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -310,12 +311,12 @@ namespace LojaGerenciamento.Application.Services
             var pedido = await _context.Pedidos
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Produto)
-                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
 
-            var item = pedido.Itens.FirstOrDefault(i => i.IdItemPedido == request.IdItemPedido);
+            var item = pedido.Itens.FirstOrDefault(i => i.IdItemPedido == request.IdItemPedido && i.Situacao == "Ativo");
 
             if (item == null)
                 throw new Exception("Item não encontrado no pedido");
@@ -341,12 +342,12 @@ namespace LojaGerenciamento.Application.Services
             var pedido = await _context.Pedidos
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Produto)
-                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
 
-            var item = pedido.Itens.FirstOrDefault(i => i.IdItemPedido == request.IdItemPedido);
+            var item = pedido.Itens.FirstOrDefault(i => i.IdItemPedido == request.IdItemPedido && i.Situacao == "Ativo");
 
             if (item == null)
                 throw new Exception("Item não encontrado no pedido");
@@ -390,7 +391,7 @@ namespace LojaGerenciamento.Application.Services
             var pedido = await _context.Pedidos
                 .Include(p => p.Itens)
                 .Include(p => p.Pagamentos)
-                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
@@ -425,7 +426,7 @@ namespace LojaGerenciamento.Application.Services
 
             var pedido = await _context.Pedidos
                 .Include(p => p.Itens)
-                .FirstOrDefaultAsync(p => p.IdPedido == idPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == idPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
@@ -443,7 +444,7 @@ namespace LojaGerenciamento.Application.Services
 
             var pedido = await _context.Pedidos
                 .Include(p => p.Pagamentos)
-                .FirstOrDefaultAsync(p => p.IdPedido == idPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == idPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
@@ -462,7 +463,7 @@ namespace LojaGerenciamento.Application.Services
             var pedido = await _context.Pedidos
                 .Include(p => p.Itens)
                 .Include(p => p.Pagamentos)
-                .FirstOrDefaultAsync(p => p.IdPedido == idPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == idPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");

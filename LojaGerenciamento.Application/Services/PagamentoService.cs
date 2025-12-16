@@ -25,7 +25,7 @@ namespace LojaGerenciamento.Application.Services
 
             var pagamento = await _context.Pagamentos
                 .Include(p => p.Pedido)
-                .FirstOrDefaultAsync(p => p.IdPagamento == id);
+                .FirstOrDefaultAsync(p => p.IdPagamento == id && p.Situacao == "Ativo");
             if (pagamento == null)
                 throw new Exception("Pagamento não encontrado");
 
@@ -127,7 +127,7 @@ namespace LojaGerenciamento.Application.Services
             var pedido = await _context.Pedidos
                 .Include(p => p.Itens)
                 .Include(p => p.Pagamentos)
-                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
@@ -159,7 +159,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<PagamentoResponseModel>();
 
             var pagamento = await _context.Pagamentos
-                .FirstOrDefaultAsync(p => p.IdPagamento == request.IdPagamento);
+                .FirstOrDefaultAsync(p => p.IdPagamento == request.IdPagamento && p.Situacao == "Ativo");
 
             if (pagamento == null)
                 throw new Exception("Pagamento não encontrado");
@@ -167,7 +167,7 @@ namespace LojaGerenciamento.Application.Services
             var pedido = await _context.Pedidos
                 .Include(p => p.Itens)
                 .Include(p => p.Pagamentos)
-                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
@@ -195,7 +195,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<PagamentoResponseModel>();
 
             var pagamento = await _context.Pagamentos
-                .FirstOrDefaultAsync(p => p.IdPagamento == id);
+                .FirstOrDefaultAsync(p => p.IdPagamento == id && p.Situacao == "Ativo");
 
             if (pagamento == null)
                 throw new Exception("Pagamento não encontrado");
@@ -218,7 +218,7 @@ namespace LojaGerenciamento.Application.Services
             };
 
             var pedido = await _context.Pedidos
-                .FirstOrDefaultAsync(p => p.IdPedido == idPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == idPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
@@ -251,7 +251,7 @@ namespace LojaGerenciamento.Application.Services
 
             var pedido = await _context.Pedidos
                 .Include(p => p.Pagamentos)
-                .FirstOrDefaultAsync(p => p.IdPedido == idPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == idPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");

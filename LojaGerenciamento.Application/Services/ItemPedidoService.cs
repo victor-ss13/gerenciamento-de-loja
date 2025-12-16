@@ -26,7 +26,7 @@ namespace LojaGerenciamento.Application.Services
             var item = await _context.ItensPedidos
                 .Include(x => x.Pedido)
                 .Include(x => x.Produto)
-                .FirstOrDefaultAsync(x => x.IdItemPedido == id);
+                .FirstOrDefaultAsync(x => x.IdItemPedido == id && x.Situacao == "Ativo");
 
             if (item == null)
                 throw new Exception("Item do pedido não encontrado");
@@ -83,13 +83,13 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<ItemPedidoResponseModel>();
 
             var pedido = await _context.Pedidos
-                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -118,19 +118,19 @@ namespace LojaGerenciamento.Application.Services
 
             var item = await _context.ItensPedidos
                 .Include(ip => ip.Produto)
-                .FirstOrDefaultAsync(ip => ip.IdItemPedido == request.IdItemPedido);
+                .FirstOrDefaultAsync(ip => ip.IdItemPedido == request.IdItemPedido && ip.Situacao == "Ativo");
 
             if (item == null)
                 throw new Exception("Item do pedido não encontrado");
 
             var pedido = await _context.Pedidos
-                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == request.IdPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto && p.Situacao == "Ativo");
 
             if (produto == null)
                 throw new Exception("Produto não encontrado");
@@ -163,7 +163,7 @@ namespace LojaGerenciamento.Application.Services
 
             var item = await _context.ItensPedidos
                 .Include(ip => ip.Produto)
-                .FirstOrDefaultAsync(ip => ip.IdItemPedido == idItem);
+                .FirstOrDefaultAsync(ip => ip.IdItemPedido == idItem && ip.Situacao == "Ativo");
 
             if (item == null)
                 throw new Exception("Item do pedido não encontrado");
@@ -202,7 +202,7 @@ namespace LojaGerenciamento.Application.Services
 
             var item = await _context.ItensPedidos
                 .Include(ip => ip.Produto)
-                .FirstOrDefaultAsync(ip => ip.IdItemPedido == id);
+                .FirstOrDefaultAsync(ip => ip.IdItemPedido == id && ip.Situacao == "Ativo");
 
             if (item == null)
                 throw new Exception("Item do pedido não encontrado");
@@ -229,7 +229,7 @@ namespace LojaGerenciamento.Application.Services
             };
 
             var pedido = await _context.Pedidos
-                .FirstOrDefaultAsync(p => p.IdPedido == idPedido);
+                .FirstOrDefaultAsync(p => p.IdPedido == idPedido && p.Situacao == "Ativo");
 
             if (pedido == null)
                 throw new Exception("Pedido não encontrado");

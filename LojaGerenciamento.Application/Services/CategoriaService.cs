@@ -25,7 +25,7 @@ namespace LojaGerenciamento.Application.Services
 
             var categoria = await _context.Categorias
                 .Include(c => c.Produtos)
-                .FirstOrDefaultAsync(c => c.IdCategoria == id);
+                .FirstOrDefaultAsync(c => c.IdCategoria == id && c.Situacao == "Ativo");
             if (categoria == null)
                 throw new Exception("Categoria não encontrada");
 
@@ -55,6 +55,7 @@ namespace LojaGerenciamento.Application.Services
 
             var query = _context.Categorias
                 .Include(c => c.Produtos)
+                .Where(c => c.Situacao == "Ativo")
                 .AsQueryable();
 
             // Filtro por ID
@@ -170,12 +171,12 @@ namespace LojaGerenciamento.Application.Services
 
             var categoria = await _context.Categorias
                 .Include(c => c.Produtos)
-                .FirstOrDefaultAsync(c => c.IdCategoria == request.IdCategoria);
+                .FirstOrDefaultAsync(c => c.IdCategoria == request.IdCategoria && c.Situacao == "Ativo");
             if (categoria == null)
                 throw new Exception("Categoria não encontrada");
 
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto);
+                .FirstOrDefaultAsync(p => p.IdProduto == request.IdProduto && p.Situacao == "Ativo");
             if (produto == null)
                 throw new Exception("Produto não encontrado");
 
@@ -195,7 +196,7 @@ namespace LojaGerenciamento.Application.Services
 
             var categoria = await _context.Categorias
                 .Include(c => c.Produtos)
-                .FirstOrDefaultAsync(c => c.IdCategoria == request.IdCategoria);
+                .FirstOrDefaultAsync(c => c.IdCategoria == request.IdCategoria && c.Situacao == "Ativo");
             if (categoria == null)
                 throw new Exception("Categoria não encontrada");
 

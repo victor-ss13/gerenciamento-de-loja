@@ -5,19 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-// ============================================
-// CONFIGURAÇÃO
-// ============================================
 
 var builder = new ConfigurationBuilder()
     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 var configuration = builder.Build();
-
-// ============================================
-// DEPENDENCY INJECTION
-// ============================================
 
 var services = new ServiceCollection();
 
@@ -34,10 +27,6 @@ services.AddScoped<IItemPedidoService, ItemPedidoService>();
 services.AddScoped<IPagamentoService, PagamentoService>();
 
 var serviceProvider = services.BuildServiceProvider();
-
-// ============================================
-// TESTE DE CONEXÃO
-// ============================================
 
 Console.WriteLine("====================================");
 Console.WriteLine("  SISTEMA DE GERENCIAMENTO DE LOJA");
@@ -68,10 +57,6 @@ using (var scope = serviceProvider.CreateScope())
 Console.WriteLine();
 Console.WriteLine("Todos os services foram registrados com sucesso!");
 Console.WriteLine();
-
-// ============================================
-// MENU PRINCIPAL (exemplo simples por enquanto)
-// ============================================
 
 bool executando = true;
 

@@ -28,7 +28,7 @@ namespace LojaGerenciamento.Application.Services
                     .ThenInclude(p => p.Itens)
                 .Include(c => c.Pedidos)
                     .ThenInclude(p => p.Pagamentos)
-                .FirstOrDefaultAsync(c => c.IdCliente == id);
+                .FirstOrDefaultAsync(c => c.IdCliente == id && c.Situacao == "Ativo");
 
             if (cliente == null)
                 throw new Exception("Cliente não encontrado");
@@ -133,7 +133,7 @@ namespace LojaGerenciamento.Application.Services
 
             // Verifica se já existe cliente com o mesmo nome
             var clienteExistente = await _context.Clientes
-                .FirstOrDefaultAsync(c => c.Nome.ToLower() == request.Nome.ToLower());
+                .FirstOrDefaultAsync(c => c.Nome.ToLower() == request.Nome.ToLower() && c.Situacao == "Ativo");
 
             if (clienteExistente != null)
                 throw new Exception("Já existe um cliente com este nome");
@@ -153,7 +153,7 @@ namespace LojaGerenciamento.Application.Services
             var retorno = new Response<ClienteResponseModel>();
 
             var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(c => c.IdCliente == request.IdCliente);
+                .FirstOrDefaultAsync(c => c.IdCliente == request.IdCliente && c.Situacao == "Ativo");
 
             if (cliente == null)
                 throw new Exception("Cliente não encontrado");
@@ -161,7 +161,8 @@ namespace LojaGerenciamento.Application.Services
             // Verifica se já existe outro cliente com o mesmo nome
             var clienteExistente = await _context.Clientes
                 .FirstOrDefaultAsync(c => c.Nome.ToLower() == request.Nome.ToLower()
-                                       && c.IdCliente != request.IdCliente);
+                                       && c.IdCliente != request.IdCliente
+                                       && c.Situacao == "Ativo");
 
             if (clienteExistente != null)
                 throw new Exception("Já existe outro cliente com este nome");
@@ -182,7 +183,7 @@ namespace LojaGerenciamento.Application.Services
 
             var cliente = await _context.Clientes
                 .Include(c => c.Pedidos)
-                .FirstOrDefaultAsync(c => c.IdCliente == id);
+                .FirstOrDefaultAsync(c => c.IdCliente == id && c.Situacao == "Ativo");
 
             if (cliente == null)
                 throw new Exception("Cliente não encontrado");
@@ -209,7 +210,7 @@ namespace LojaGerenciamento.Application.Services
                     .ThenInclude(p => p.Itens)
                 .Include(c => c.Pedidos)
                     .ThenInclude(p => p.Pagamentos)
-                .FirstOrDefaultAsync(c => c.IdCliente == idCliente);
+                .FirstOrDefaultAsync(c => c.IdCliente == idCliente && c.Situacao == "Ativo");
 
             if (cliente == null)
                 throw new Exception("Cliente não encontrado");
